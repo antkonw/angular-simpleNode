@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>记事本</title>
+	<link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+</head>
+<body data-ng-app="myApp" data-ng-controller="myCtrl">
+
+	<div class="container">
+		<h2>我的记事本</h2>
+		<form data-ng-submit="add()" name="myForm">
+			<div class="input-group">
+				<input type="text" ng-model="myInput" placeholder="新增" class="form-control">
+				<div class="input-group-btn">
+					<input type="submit" value="新增" ng-disabled="incomplete" class="btn btn-default">
+				</div>
+			</div>
+		</form>
+		<br />
+		<div ng-repeat="x in items | reverse">
+			<ul class="list-group">
+				<li class="list-group-item">
+					<div class="checkbox">
+						<label style="width:80%;">
+							<input type="checkbox" ng-model="x.done">
+							<span ng-if="!x.editing" ng-bind="x.myText"></span>
+							<input type="text" ng-if="x.editing" ng-model="x.myText" class="form-control input-sm">
+						</label>
+						<span class="btn btn-info btn-xs pull-right" title="编辑" ng-if="!x.editing"
+				              ng-click="x.editing = true">
+				          <i class="glyphicon glyphicon-pencil"></i>
+				        </span>
+				        <span class="btn btn-info btn-xs pull-right" title="保存" ng-if="x.editing"
+				              ng-click="x.editing = false">
+				          <i class="glyphicon glyphicon-floppy-disk"></i>
+				        </span>
+					</div>
+
+				</li>
+			</ul>
+		</div>
+		<p><button ng-click="remove()" class="btn btn-danger btn-sm">删除记录</button></p>
+	</div>
+	<!-- 	<script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script> -->
+    <!-- <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script> -->
+	<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.js"></script>
+	<script src="js/index.js"></script>
+</body>
+</html>
